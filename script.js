@@ -124,10 +124,10 @@ function updateTotals(){
     let total = 0
 
     // Percorre cada item (li) da lista (ul).
-    for(let item = 0; item < items.lenght; item++){
+    for (let item = 0; item < items.length; item++) {
       const itemAmount = items[item].querySelector(".expense-amount")
 
-      // Remove caracteres não númericos e substitui a virgula por ponto.
+      // Remove caracteres não númericos e substitui a vírgula por ponto.
       let value = itemAmount.textContent
       .replace(/[^\d,]/g, "")
       .replace(",",".")
@@ -137,14 +137,13 @@ function updateTotals(){
 
       // Verifica se é um número válido.
       if (isNaN(value)) {
-        return alert(
-          "Não foi possível calcular o total, o valor não parece ser um número."
+        return alert (
+          "Não foi possível calcular o total. O valor não parece ser um número."
         )
       }
 
       // Incrementa o valor total.
-      total += Number()
-
+      total += Number(value)
     }
 
     // Cria a span para adicionar o R$ formatado.
@@ -155,7 +154,7 @@ function updateTotals(){
     total = formatCurrencyBRL(total).toUpperCase().replace("R$", "")
 
     // Limpa o conteúdo do elemento.
-    expensesTotal.inerHTML = ""
+    expensesTotal.innerHTML = ""
 
     // Adiciona o símbolo da moeda e o valor total formatado.
     expensesTotal.append(symbolBRL, total)
@@ -165,3 +164,22 @@ function updateTotals(){
     alert("Não foi possível atualizar os totais.")
   }
 }
+
+// Evento que captura o clique nos itens da lista.
+expenseList.addEventListener("click", function (event) {
+
+   // Verifica se o elemento clicado é o ícone de remover.
+   if (event.target.classList.contains("remove-icon")) {
+     
+     // Obtém a li pai do elemento clicado.
+     const item = event.target.closest(".expense")
+
+     // Remove o item da lista.
+     item.remove()
+   }
+
+   // Atualiza os totais.
+   updateTotals()
+
+ }
+)
