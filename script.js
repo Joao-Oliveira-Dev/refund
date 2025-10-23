@@ -55,7 +55,6 @@ form.onsubmit = (event) => {
 // Adiciona um novo item na lista.
 function expenseAdd(newExpense){
   try {
-
     // Cria o elemento para adicionar o item (li) na lista (ul).
     const expenseItem = document.createElement("li")
     expenseItem.classList.add("expense")
@@ -98,6 +97,9 @@ function expenseAdd(newExpense){
 
     // Adiciona o item na lista.
     expenseList.append(expenseItem)
+
+    // Limpa o formulário para adicionar um novo item.
+    formClear()
 
     // Atualiza os totais.
     updateTotals()
@@ -183,3 +185,15 @@ expenseList.addEventListener("click", function (event) {
 
  }
 )
+
+function formClear() {
+
+  // Limpa os inputs.
+  expense.value = ""
+  category.value = ""
+  amount.value = ""
+
+  // Coloca foco no input de amount.
+  expense.focus()
+  
+}
